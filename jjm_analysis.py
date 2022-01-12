@@ -596,13 +596,16 @@ def batch_analysis(parameter_list, file_list):
 	batch_output_dict = {}
 	
 	for file in file_list:
+		print('file is:')
+		print(file)
 		if file.endswith('.abf'):
 			stf.file_open(file);
 		else:
 			if file.startswith('TSeries'):
 				sweeps_compiled_from_pv_tseries = pv.import_t_series_episodic(file);
+				print('loaded_directory')
 				pv.plot_episodic_array(sweeps_compiled_from_pv_tseries); 
-		
+				
 		baseline_start = int(parameter_list[0]); 
 		baseline_end = int(parameter_list[1]); 
 		baseline_2_start = int(parameter_list[2]); 
@@ -759,6 +762,11 @@ def average_sweeps(*argv):
 	return(sweeps_mean)
 		
 def remove_artifacts(art_1_start, art_1_end, art_2_start, art_2_end):
+	sweep = stf.get_trace();
+	artifacts_removed = np.hstack([sweep[:art_1_start],sweep[art_1_end:art_2_start],sweep[art_2_end:]]);
+	return(artifacts_removed)
+
+def remove_artifacts_untrim(art_1_start, art_1_end, art_2_start, art_2_end):
 	sweep = stf.get_trace();
 	artifacts_removed = np.hstack([sweep[:art_1_start],sweep[art_1_end:art_2_start],sweep[art_2_end:]]);
 	return(artifacts_removed)

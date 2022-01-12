@@ -79,9 +79,9 @@ def read_and_adjust_csv_recording(csv_filename, plot_var):
 	sweep_array = np.array([time[1:], channel_0[1:]])
 	#this should be a numpy array 
 	# creates additional csv file for analysis
-	#newfilename =  filename + '_adjustedforimport.csv' ; 
+	newfilename =  filename + '_adjustedforimport.csv' ; 
 
-	#writer = csv.writer(open(newfilename, 'wb')) ;
-	#for i in range(len(channel_0)):
-	#	writer.writerow([time[i], channel_0[i]]) ;
+	writer = csv.writer(open(newfilename, 'wb')) ;
+	for i in range(len(channel_0)):
+		writer.writerow([time[i], channel_0[i]]) ;
 	return(sweep_array)

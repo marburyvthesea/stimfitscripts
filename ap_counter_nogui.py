@@ -1,8 +1,9 @@
 import sys
 import numpy as np
+##remove use of stimfit calls here 
 import stf
 import spells
-import pandas as pd
+
 
 def find_AP_peaks(start_msec, delta_msec, current_start, current_delta, threshold_value, deflection_direction, mark_option):
 	
@@ -17,21 +18,6 @@ def find_AP_peaks(start_msec, delta_msec, current_start, current_delta, threshol
 		
 	loaded_file = stf.get_filename()[:-4] ; 
 	np.savetxt(loaded_file + '_AP_counts.csv', event_counts, delimiter=',', newline='\n'); 
-	return(event_counts)
-
-def find_AP_peaks_continuous_trace(start_msec, delta_msec, interval_msec, current_start, current_delta, num_pulses,f_name, threshold=0, up=True, trace=None, mark=True):
-
-	event_counts = np.zeros((num_pulses, 2));
-
-	for trace_ in range(num_pulses):
-
-		params = np.add([start_msec, start_msec+delta_msec], [interval_msec*trace_]*2)
-
-		event_counts[trace_][1] = jjm_count(params[0], params[1], threshold, up, trace, mark)[0]; 
-		event_counts[trace_][0] = current_start + (current_delta*trace_); 
-
-	np.savetxt(f_name + '_AP_counts.csv', event_counts, delimiter=',', newline='\n'); 
-
 	return(event_counts)
 	
 def find_AP_peak_ADP(start_msec, delta_msec, current_start, current_delta, threshold_value, deflection_direction, mark_option):

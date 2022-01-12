@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/')
+sys.path.append('/Users/johnmarshall/anaconda3/envs/stimfit_env/lib/python2.7/site-packages/')
 from neo import io
 import csv
 import numpy as np 
@@ -13,7 +13,8 @@ def load_gap_free_trace(file_to_load):
 	experiment_name = filename.rstrip('.abf');
 
 	r = io.AxonIO(filename=file_to_load)
-	bl = r.read_block(lazy=False, cascade=True)
+	#bl = r.read_block(lazy=False, cascade=True)
+	bl = r.read_block(lazy=False)
 	#segments are sweeps
 
 	
